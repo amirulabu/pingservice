@@ -1,0 +1,27 @@
+<div>Ping progress</div>
+jobGroupId :
+<div id="job-group-id"><%- jobGroupId %></div>
+<br />
+<div id="progress"></div>
+<br />
+<a href="/ping">Go Back</a>
+
+<script>
+  (async () => {
+    const jobGroupId = document.getElementById("job-group-id").innerText.trim();
+    const progressElemenet = document.getElementById("progress");
+    let data;
+
+    const intervalId = setInterval(async () => {
+      data = await fetch(`/ping/job/${jobGroupId}`, { method: "POST" })
+        .then((res) => res.json())
+        .then((d) => d);
+
+      progressElemenet.innerHTML = JSON.stringify(data);
+
+      if (data.total === data.completed) {
+        clearInterval(intervalId);
+      }
+    }, 1000);
+  })();
+</script>
