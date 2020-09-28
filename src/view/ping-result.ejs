@@ -4,7 +4,7 @@ jobGroupId :
 <br />
 <div id="progress"></div>
 <br />
-<a href="/ping">Go Back</a>
+<a href="/">Go Back</a>
 
 <script>
   (async () => {
@@ -22,6 +22,6 @@ jobGroupId :
       if (data.total === data.completed) {
         clearInterval(intervalId);
       }
-    }, 1000);
+    }, 500);
   })();
 </script>
