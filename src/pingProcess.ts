@@ -5,7 +5,7 @@ const execWithPromise = promisify(exec);
 import { Job } from "bull";
 
 export default async (job: Job) => {
-  const result = await execWithPromise(`ping -c 3 ${job.data.url}`);
+  const result = await execWithPromise(`ping -c 3 -W 5 ${job.data.url}`);
   if (result.stdout) {
     return parsePingResult(result.stdout);
   }
