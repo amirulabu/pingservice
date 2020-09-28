@@ -1,8 +1,28 @@
+<style>
+  #myProgress {
+    width: 500px;
+    background-color: grey;
+    text-align: center;
+  }
+
+  #myBar {
+    width: 0%;
+    height: 30px;
+    background-color: #4caf50;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+  }
+</style>
+
 <div>Ping progress</div>
 jobGroupId :
 <div id="job-group-id"><%- jobGroupId %></div>
 <br />
 <div id="progress"></div>
+<div id="myProgress">
+  <div id="myBar">0.0%</div>
+</div>
 <br />
 <a href="/">Go Back</a>
 
@@ -10,6 +30,8 @@ jobGroupId :
   (async () => {
     const jobGroupId = document.getElementById("job-group-id").innerText.trim();
     const progressElemenet = document.getElementById("progress");
+    const myBar = document.getElementById("myBar");
+    let width = 0;
     let data;
 
     const intervalId = setInterval(async () => {
@@ -18,6 +40,9 @@ jobGroupId :
         .then((d) => d);
 
       progressElemenet.innerHTML = JSON.stringify(data);
+      width = data.percentage;
+      myBar.style.width = width + "%";
+      myBar.innerHTML = width.toFixed(1) + "%";
 
       if (data.total === data.completed) {
         clearInterval(intervalId);
