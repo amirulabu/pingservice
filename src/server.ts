@@ -21,7 +21,7 @@ export default function startServer() {
     // debug: true,
   });
 
-  router.get("/", async (ctx) => {
+  router.get("/", async (ctx: any) => {
     await ctx.render("ping");
   });
 
