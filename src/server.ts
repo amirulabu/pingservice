@@ -22,25 +22,7 @@ export default function startServer() {
   });
 
   router.get("/", async (ctx) => {
-    ctx.body = `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
-    <form action="/ping" method="post">
-    <label for="addresses">Add ip or domain addresses to check (comma separated):</label>
-    <br />
-    <textarea id="addresses" name="addresses" type="text" rows="5" cols="33"></textarea>
-    <br />
-    <input type="submit"></input>
-    </form>
-    </body>
-    </html>
-    `;
+    await ctx.render("ping");
   });
 
   router.post("/ping", async (ctx) => {

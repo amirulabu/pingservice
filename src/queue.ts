@@ -26,7 +26,7 @@ pingQueue.process(5, path.join(__dirname, `pingProcess.${ext}`));
 pingQueue.on("completed", (job, result) => {
   if (result) {
     // console.log(result);
-    const isUp = result.packetLoss === "0%";
+    const isUp = ["0%", "0.0%"].includes(result.packetLoss);
     const resultText = isUp ? "up" : "down";
     console.log(
       `job id: ${job.id} is completed. output: ${job.data.url} is ${resultText}`
